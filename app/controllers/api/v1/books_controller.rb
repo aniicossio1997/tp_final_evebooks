@@ -1,13 +1,19 @@
 class Api::V1::BooksController < ApplicationController
   before_action :set_book, only: %i[show update]
   before_action :check_login, only: %i[create]
-  before_action :check_owner, only: %i[update destroy show]
+  before_action :check_owner, only: %i[update destroy ]
   #before_action :check_owner, only: %i[update]
   # ...
   def index
-    render json: Book.all
+    #render json: Book.all
+    @books= Book.all
+    options = { include: [:user] }
+    render json: BookSerializer.new(@books, options).serializable_hash
   end
-
+  def show
+    #render json: @book
+    render json: BookSerializer.new(@book).serializable_hash
+  end
   def create
     book = current_user.books.build(book_params)
     if book.save

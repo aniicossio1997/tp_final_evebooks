@@ -45,3 +45,7 @@ gem "jwt", "~> 2.2"
 gem 'hirb'
 
 gem "faker", "~> 2.16"
+
+gem "fast_jsonapi", "~> 1.5"
+
+gem "rack-cors", "~> 1.1"
